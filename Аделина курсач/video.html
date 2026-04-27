@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Видео — Пугачан</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="page-with-header">
+  <header class="header header--static" id="header">
+    <div class="container header__inner">
+      <a href="./index.html#hero" class="logo">
+        <img src="./img/logotip.png" alt="Логотип Пугачан">
+        <span class="logo__text">
+          <span>центр реабилитации и приют для животных</span>
+          <span>ПУГАЧАН</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="./index.html#hero">ГЛАВНАЯ</a>
+        <a href="./about.html">О НАС</a>
+        <a href="./video.html">ВИДЕО</a>
+        <a href="./pets.html">ПИТОМЦЫ</a>
+        <a href="./help.html">ПОМОЩЬ</a>
+        <a href="./location.html">МЕСТОПОЛОЖЕНИЕ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="video-page">
+      <div class="video-page__title-bar">
+        <div class="container">
+          <h1>ВИДЕО</h1>
+        </div>
+      </div>
+      <div class="container video-page__content">
+        <h2>ОБРАТИТЕ ВНИМАНИЕ НА НАШ <span>ПРОМО-РОЛИК</span></h2>
+        <div class="video-page__frame">
+          <!-- ВАРИАНТ 1: Фоновое видео как в RUKADR (autoplay, muted, loop) -->
+          <video class="promo-video" autoplay muted loop playsinline>
+            <source src="/zemlTNsQdMpbBI12ZYKaSyf7FaBx8M2qsQBwB_u7mu0m4tp1PekXX0kobNz1gdQ-pB6YGuvu-vpCff5pd09NTqMy_Nero_AI_Face_Animation_Поцелуй.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+          
+          <!-- ВАРИАНТ 2: Видео с элементами управления (раскомментируйте если нужно) -->
+          <!--
+          <video class="promo-video" controls preload="metadata" poster="./img/foto_o_nas.png">
+            <source src="./img/promo-video.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+          -->
+        </div>
+        
+        <!-- Дополнительное описание под видео -->
+        <div class="video-description">
+          <p>Посмотрите наш промо-ролик, чтобы узнать больше о жизни приюта "Пугачан" и наших подопечных.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- СЕКЦИЯ ОТЗЫВОВ (как на странице питомцев) -->
+    <section class="reviews-section">
+      <div class="container">
+        <div class="reviews-section__header">
+          <h2>ОТЗЫВЫ <span>О НАШЕМ ПРИЮТЕ</span></h2>
+          <p>Поделитесь впечатлениями о нашем приюте и его обитателях</p>
+        </div>
+
+        <!-- Форма добавления отзыва -->
+        <div class="review-form-container">
+          <h3>ОСТАВИТЬ ОТЗЫВ</h3>
+          <form class="review-form" id="reviewForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reviewName">Ваше имя *</label>
+                <input type="text" id="reviewName" placeholder="Как вас зовут?" required>
+              </div>
+              <div class="form-group">
+                <label for="reviewRating">Оценка</label>
+                <select id="reviewRating">
+                  <option value="5">⭐⭐⭐⭐⭐ Отлично</option>
+                  <option value="4">⭐⭐⭐⭐ Хорошо</option>
+                  <option value="3">⭐⭐⭐ Средне</option>
+                  <option value="2">⭐⭐ Плохо</option>
+                  <option value="1">⭐ Ужасно</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label for="reviewText">Текст отзыва *</label>
+              <textarea id="reviewText" rows="4" placeholder="Расскажите о вашем опыте посещения приюта..." required></textarea>
+            </div>
+            <div class="form-group full-width">
+              <label for="reviewPhoto">Фото (необязательно)</label>
+              <input type="file" id="reviewPhoto" accept="image/*">
+              <div class="image-preview" id="imagePreview"></div>
+            </div>
+            <button type="submit" class="review-submit-btn">ОПУБЛИКОВАТЬ ОТЗЫВ</button>
+          </form>
+        </div>
+
+        <!-- Сетка отзывов -->
+        <div class="reviews-header">
+          <h3>ОТЗЫВЫ ПОСЕТИТЕЛЕЙ</h3>
+          <div class="reviews-filters">
+            <button class="filter-btn active" data-filter="all">Все отзывы</button>
+            <button class="filter-btn" data-filter="5">⭐⭐⭐⭐⭐</button>
+            <button class="filter-btn" data-filter="4">⭐⭐⭐⭐</button>
+            <button class="filter-btn" data-filter="3">⭐⭐⭐</button>
+          </div>
+        </div>
+        <div class="reviews-grid" id="reviewsGrid">
+          <!-- Здесь будут появляться отзывы -->
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta" aria-label="Призыв к действию">
+      <p>НЕ ОСТАВАЙТЕСЬ В СТОРОНЕ, ПОМОГИТЕ ЖИВОТНЫМ ОБРЕСТИ СВОЙ ДОМ!</p>
+    </section>
+  </main>
+
+  <footer class="contacts" id="contacts">
+    <div class="container contacts__grid">
+      <div class="contacts__col contacts__col--brand">
+        <div class="contacts__brand-wrap">
+          <img src="./img/logotip.png" alt="Логотип Пугачан">
+          <div>
+            <p class="contacts__brand-sub">центр реабилитации и<br>приют для животных</p>
+            <p class="contacts__brand">ПУГАЧАН</p>
+          </div>
+        </div>
+        <p>
+          Для реализации нашего<br>
+          проекта нам необходим<br>
+          земельный участок<br>
+          площадью 2 га и<br>
+          строительные материалы.
+        </p>
+        <p>Политика<br>конфиденциальности</p>
+      </div>
+      <div class="contacts__col">
+        <p class="contacts__title">Реквизиты</p>
+        <p>
+          АНО «Центр<br>
+          реабилитации и приют<br>
+          для<br>
+          животных «Отрада»<br>
+          ИНН 5609187812<br>
+          КПП 560901001<br>
+          ОГРН 1175658023166<br>
+          р/с<br>
+          40703810903000001577<br>
+          ОО №19 «На гагарина»<br>
+          г. Оренбург Приволжского<br>
+          Ф-ла ПАО<br>
+          «Промсвязьбанк»
+        </p>
+      </div>
+      <div class="contacts__col contacts__col--contact">
+        <p class="contacts__title">Контакты</p>
+        <p class="contacts__line">+7 (922) 818 44 22</p>
+        <p class="contacts__line">pugachan@mail.ru</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js" defer></script>
+  
+  <!-- Специальный скрипт для видео и отзывов -->
+  <script>
+    (function() {
+      // ========== НАСТРОЙКА ВИДЕО ==========
+      const video = document.querySelector('.promo-video');
+      if (video) {
+        // Обеспечиваем автозапуск даже в мобильных браузерах
+        video.play().catch(e => console.log('Автовоспроизведение заблокировано:', e));
+      }
+      
+      // ========== ОТЗЫВЫ ==========
+      const reviewsGrid = document.getElementById('reviewsGrid');
+      if (!reviewsGrid) return;
+
+      let reviews = [];
+
+      function loadReviews() {
+        const saved = localStorage.getItem('pugachan_video_reviews');
+        if (saved) {
+          try {
+            reviews = JSON.parse(saved);
+            renderReviews();
+          } catch(e) { console.error(e); }
+        }
+      }
+
+      function saveReviews() {
+        localStorage.setItem('pugachan_video_reviews', JSON.stringify(reviews));
+      }
+
+      function getRatingStars(rating) {
+        const fullStar = '⭐';
+        const emptyStar = '☆';
+        return fullStar.repeat(rating) + emptyStar.repeat(5 - rating);
+      }
+
+      function renderReviews(filter = 'all') {
+        let filteredReviews = reviews;
+        if (filter !== 'all') {
+          filteredReviews = reviews.filter(r => r.rating === parseInt(filter));
+        }
+        
+        if (filteredReviews.length === 0) {
+          reviewsGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:#888;">Пока нет отзывов. Будьте первым!</div>`;
+          return;
+        }
+        
+        reviewsGrid.innerHTML = filteredReviews.map(review => `
+          <article class="review-card" data-id="${review.id}" data-rating="${review.rating}">
+            <button class="review-card__delete" onclick="deleteVideoReview('${review.id}')">×</button>
+            ${review.image 
+              ? `<img class="review-card__image" src="${review.image}" alt="Фото">`
+              : `<div class="review-card__no-image">🐾</div>`
+            }
+            <div class="review-card__content">
+              <div class="review-card__rating">${getRatingStars(review.rating)}</div>
+              <p class="review-card__text">${escapeHtml(review.text)}</p>
+              <div class="review-card__author">
+                <strong>${escapeHtml(review.author)}</strong> • ${review.date}
+              </div>
+            </div>
+          </article>
+        `).join('');
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      window.deleteVideoReview = function(id) {
+        if (confirm('Удалить этот отзыв?')) {
+          reviews = reviews.filter(r => r.id !== id);
+          saveReviews();
+          const currentFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+          renderReviews(currentFilter);
+        }
+      };
+
+      function getFormattedDate() {
+        const now = new Date();
+        const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+        return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+      }
+
+      const form = document.getElementById('reviewForm');
+      if (form) {
+        const photoInput = document.getElementById('reviewPhoto');
+        const imagePreview = document.getElementById('imagePreview');
+        
+        photoInput?.addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              imagePreview.innerHTML = `<img src="${event.target.result}" alt="Превью">`;
+              imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+          } else {
+            imagePreview.innerHTML = '';
+            imagePreview.style.display = 'none';
+          }
+        });
+        
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const author = document.getElementById('reviewName')?.value.trim();
+          const rating = document.getElementById('reviewRating')?.value;
+          const text = document.getElementById('reviewText')?.value.trim();
+          const photoFile = photoInput?.files[0];
+          
+          if (!author) {
+            alert('Пожалуйста, введите ваше имя');
+            return;
+          }
+          if (!text) {
+            alert('Пожалуйста, напишите текст отзыва');
+            return;
+          }
+          if (text.length < 5) {
+            alert('Отзыв должен содержать хотя бы 5 символов');
+            return;
+          }
+          
+          const newReview = {
+            id: Date.now().toString(),
+            author: author,
+            rating: parseInt(rating),
+            text: text,
+            date: getFormattedDate(),
+            image: null
+          };
+          
+          function publishReview(review) {
+            reviews.unshift(review);
+            saveReviews();
+            renderReviews(document.querySelector('.filter-btn.active')?.dataset.filter || 'all');
+            form.reset();
+            imagePreview.innerHTML = '';
+            imagePreview.style.display = 'none';
+            alert('Отзыв опубликован! Спасибо!');
+          }
+          
+          if (photoFile) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+              newReview.image = event.target.result;
+              publishReview(newReview);
+            };
+            reader.readAsDataURL(photoFile);
+          } else {
+            publishReview(newReview);
+          }
+        });
+      }
+      
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.dataset.filter;
+          renderReviews(filter);
+        });
+      });
+      
+      loadReviews();
+    })();
+  </script>
+  
+  <style>
+    /* Дополнительные стили для видео */
+    .promo-video {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .video-description {
+      margin-top: 20px;
+      text-align: center;
+      color: #555;
+      font-size: 0.95rem;
+    }
+    
+    /* Стили для рейтинга в карточках */
+    .review-card__rating {
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    
+    .review-card__image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .review-card__no-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #e8e8e8, #f5f5f5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    
+    /* Адаптив */
+    @media (max-width: 62rem) {
+      .promo-video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</body>
+</html>

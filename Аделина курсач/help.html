@@ -6,8 +6,372 @@
   <title>Помощь — Пугачан</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    
+    .urgent-banner {
+      background: linear-gradient(135deg, #3ce7e7, #c0392b);
+      border-radius: 20px;
+      padding: 25px 30px;
+      margin-bottom: 40px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .urgent-banner::before {
+      content: '⚠️';
+      position: absolute;
+      font-size: 120px;
+      opacity: 0.1;
+      right: -20px;
+      top: -20px;
+      transform: rotate(15deg);
+    }
+    
+    .urgent-banner h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+    
+    .urgent-banner p {
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+    
+    .urgent-banner .urgent-btn {
+      background: white;
+      color: #c0392b;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .urgent-banner .urgent-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin: 40px 0;
+    }
+    
+    .goal-card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .goal-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(65, 185, 194, 0.15);
+    }
+    
+    .goal-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    
+    .goal-card h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .goal-progress {
+      background: #eee;
+      border-radius: 30px;
+      height: 12px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    
+    .goal-progress-fill {
+      background: linear-gradient(90deg, #41b9c2, #6dd5df);
+      width: 0%;
+      height: 100%;
+      border-radius: 30px;
+      transition: width 0.8s ease;
+    }
+    
+    .goal-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .goal-stats span:first-child {
+      font-weight: 700;
+      color: #41b9c2;
+    }
+    
+    .donate-goal-btn {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    
+    .donate-goal-btn:hover {
+      background: #41b9c2;
+      color: white;
+    }
+    
+   
+    .help-ways {
+      background: #f8f9fa;
+      border-radius: 30px;
+      padding: 40px;
+      margin: 40px 0;
+    }
+    
+    .help-ways h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+    
+    .ways-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+    
+    .way-item {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+    
+    .way-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .way-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+    
+    .way-item h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #41b9c2;
+    }
+    
+    .way-item p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    
+    .donate-form-modern {
+      background: linear-gradient(135deg, #fff, #f8f9fa);
+      border-radius: 30px;
+      padding: 40px;
+      margin: 40px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .donate-form-modern h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    .donate-form-modern > p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .amount-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+    
+    .amount-btn {
+      background: #f0f0f0;
+      border: 2px solid transparent;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .amount-btn:hover {
+      background: #e0e0e0;
+    }
+    
+    .amount-btn.active {
+      background: #41b9c2;
+      color: white;
+      border-color: #41b9c2;
+    }
+    
+    .donate-input-group {
+      margin-bottom: 20px;
+    }
+    
+    .donate-input-group input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    
+    .donate-input-group input:focus {
+      outline: none;
+      border-color: #41b9c2;
+    }
+    
+    .donate-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #41b9c2, #359ea6);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .donate-submit-btn:hover {
+      transform: scale(1.02);
+    }
+    
+    
+    .boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+    
+    .box-item {
+      background: white;
+      padding: 15px 20px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .box-item:hover {
+      transform: translateX(5px);
+      background: #f8f9fa;
+    }
+    
+    .box-icon {
+      font-size: 28px;
+    }
+    
+    .box-item span {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    
+    
+    .volunteer-section {
+      background: linear-gradient(135deg, #1a5f6b, #0d3d45);
+      border-radius: 30px;
+      padding: 40px;
+      margin: 40px 0;
+      color: white;
+      text-align: center;
+    }
+    
+    .volunteer-section h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    
+    .volunteer-stats {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #8ee4ea;
+    }
+    
+    .volunteer-btn {
+      background: white;
+      color: #0d3d45;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .volunteer-btn:hover {
+      transform: scale(1.05);
+      background: #8ee4ea;
+    }
+    
+    @media (max-width: 62rem) {
+      .goals-grid, .ways-grid {
+        grid-template-columns: 1fr;
+      }
+      .boxes-grid {
+        grid-template-columns: 1fr;
+      }
+      .volunteer-stats {
+        gap: 25px;
+      }
+    }
+  </style>
 </head>
 <body class="page-with-header">
   <header class="header header--static" id="header">
@@ -39,84 +403,111 @@
       </div>
 
       <div class="container help-page__content">
-        <h2>БЕЗНАЛИЧНЫЕ <span>ПОЖЕРТВОВАНИЯ</span></h2>
-        <p class="help-page__card-line">
-          <img class="help-page__small-icon" src="./img/finansovaya.png" alt="" aria-hidden="true">
-          НОМЕР КАРТЫ: Сбербанк 5469 4600 1334 9617 Евгения Владимировна П
-        </p>
-        <h2>БЛАГОТВОРИТЕЛЬНЫЕ <span>ЯЩИКИ</span></h2>
-        <ul class="help-page__boxes">
-          <li>г.Оренбург, ул.Пролетарская, 262, «Школа-Студия Нелли Губеевой»</li>
-          <li>г.Оренбург, ул.Мало-Луговая, 3/1, ТЦ «Евразия», «Институт здоровья»</li>
-          <li>г.Оренбург, ул.Салмышская, 71, ТРЦ «Кит», «Extreme Gym Оренбург»</li>
-          <li>г.Оренбург, ул.Липовая, 3, Груминг-салон «Зоостиль»</li>
-          <li>г.Оренбург, ул.Степана Разина, 185 «Sport nutrition»</li>
-          <li>г.Оренбург, ул.Алтайская, 10, магазин «Дом обуви»</li>
-          <li>г.Оренбург, д.8 Марта/Володaрского 40/22, Центральный рынок, торговый павильон «Мясо», место 18</li>
-          <li>г.Оренбург, ул.Советская, 42, ЦУМ «Меридиан», магазин «Alice»</li>
-          <li>г.Оренбург, пр. Гагарина 33/3 стоматология Елены Степановой</li>
-          <li>г.Оренбург, ТРЦ «Север», магазин «Баден»</li>
-          <li>г.Оренбург, пр.Победы, 114, гостиница «Виктория»</li>
-          <li>г.Оренбург, ул.Туркестанская, 149, ТК «Три Кита», магазин «4 с хвостиком»</li>
-          <li>г.Оренбург, ул. Автомобилистов 21, «Студия Галины Гончаровой»</li>
-          <li>г.Оренбург, ул.Челюскинцев, 17/4, «Black House»</li>
-          <li>г.Оренбург, ул.Пролетарская, 34, Сервисный центр «Макинтош»</li>
-          <li>г.Оренбург, ул.Кирова, 6, «Имназия №2»</li>
-          <li>г.Оренбург, ул.Пролетарская, 27, ЦУМ «Меридиан» «Сова»</li>
-          <li>г.Оренбург, ул.Новая, 4, инвестиционно-ризлторская компания «Милана»</li>
-          <li>г.Оренбург, Загородное шоссе, 38/2, заправка «Ростанефть»</li>
-        </ul>
+        
+       
+        <div class="urgent-banner animate-on-scroll">
+          <h3>Срочно нужна помощь!</h3>
+          <p>На этой неделе 15 питомцам требуется вакцинация и лечение. Каждая минута на счету!</p>
+          <button class="urgent-btn" onclick="document.querySelector('.donate-form-modern').scrollIntoView({behavior:'smooth'})">Помочь сейчас →</button>
+        </div>
 
-        <section class="help-page__care">
-          <h3>УХОД ЗА <span>ЖИВОТНЫМИ</span></h3>
-          <div class="help-page__care-grid">
-            <div class="help-page__text">
-              <p>
-                Мы стараемся уделить внимание каждому нашему питомцу, но, к сожалению, в ежедневных заботах это не всегда получается в полной мере. Раздача корма, воды и уборка вольеров занимает весь день, и очень редко удается просто пообщаться с животным.
-              </p>
-              <p>
-                Все животные очень дружелюбные и контактные, всегда рады любому проявлению внимания. Многие из них никогда не выходили за пределы приюта, некоторые – своего вольера.
-              </p>
-              <p>
-                Вы можете подарить свой выходной в любой день недели нашему питомцу, а именно:
-              </p>
-              <ol>
-                <li>Помочь раздать еду, воду, убрать в вольерах для животных;</li>
-                <li>Расчесать и подстричь наших особо лохматых питомцев.</li>
-                <li>Помочь в подготовке еды для питомцев.</li>
-                <li>Просто зайти в каждый вольер и погладить, поиграть с его жильцами.</li>
-              </ol>
-              <p>Можно привезти зооигрушки для щенков.</p>
-              <p>Также мы постоянно ведем ремонтные работы в действующем приюте, поэтому нам всегда не хватает рабочих рук для:</p>
-              <ol>
-                <li>Укрепления вольеров;</li>
-                <li>Утепления будок;</li>
-                <li>Постройки деревянных настилов в вольерах.</li>
-              </ol>
-              <p>
-                Каждый из вас, наверняка, сможет найти дома ненужные для себя, но всегда востребованные у нас ведра, тазики, миски, кастрюли любых размеров, теплые вещи, предметы мягкой мебели (для крупных собак, которые отказываются заходить в будки даже в холодное время года). Всегда нужны веники, метлы и совки. Также у нас не хватает ошейников и поводков.
-              </p>
-              <p class="help-page__notice-title">ВСЕМ ПОСЕТИТЕЛЯМ ПРИЮТА:</p>
-              <p>
-                Приезжая к нам не забудьте главное – сменную одежду и обувь! Наши питомцы от переизбытка радости очень высоко прыгают на посетителей своими не всегда чистыми лапами.
-              </p>
-            </div>
-            <div class="help-page__care-image">
-              <img src="./img/foto_o_nas.png" alt="Волонтер и питомец">
-            </div>
+        
+        <h2 style="text-align: center; margin-bottom: 20px;">НАШИ <span>ЦЕЛИ</span></h2>
+        <div class="goals-grid">
+          <div class="goal-card animate-on-scroll">
+            <div class="goal-icon">🏠</div>
+            <h4>Новый вольер</h4>
+            <div class="goal-progress"><div class="goal-progress-fill" style="width: 45%"></div></div>
+            <div class="goal-stats"><span>Собрано: 67 500 ₽</span><span>Нужно: 150 000 ₽</span></div>
+            <button class="donate-goal-btn" onclick="setAmount(150000)">Пожертвовать на вольер</button>
           </div>
-        </section>
+          <div class="goal-card animate-on-scroll">
+            <div class="goal-icon">💊</div>
+            <h4>Лекарства на месяц</h4>
+            <div class="goal-progress"><div class="goal-progress-fill" style="width: 72%"></div></div>
+            <div class="goal-stats"><span>Собрано: 32 400 ₽</span><span>Нужно: 45 000 ₽</span></div>
+            <button class="donate-goal-btn" onclick="setAmount(45000)">Пожертвовать на лекарства</button>
+          </div>
+          <div class="goal-card animate-on-scroll">
+            <div class="goal-icon">🍖</div>
+            <h4>Корм на зиму</h4>
+            <div class="goal-progress"><div class="goal-progress-fill" style="width: 28%"></div></div>
+            <div class="goal-stats"><span>Собрано: 43 200 ₽</span><span>Нужно: 154 000 ₽</span></div>
+            <button class="donate-goal-btn" onclick="setAmount(154000)">Пожертвовать на корм</button>
+          </div>
+        </div>
 
-        <form class="donate-form">
-          <h4>ПОЖЕРТВОВАТЬ</h4>
-          <input type="text" placeholder="ВВЕДИТЕ ФИО">
-          <input type="tel" placeholder="НОМЕР ТЕЛЕФОНА">
-          <input type="text" placeholder="СУММА ПОЖЕРТВОВАНИЯ">
-        </form>
+        
+        <div class="help-ways animate-on-scroll">
+          <h3> Как вы можете помочь</h3>
+          <div class="ways-grid">
+            <div class="way-item"><div class="way-icon">💸</div><h4>Финансово</h4><p>Любая сумма важна. Даже 100 рублей — это миска корма.</p></div>
+            <div class="way-item"><div class="way-icon">📦</div><h4>Вещами</h4><p>Корма, лекарства, миски, поводки — всё в дело!</p></div>
+            <div class="way-item"><div class="way-icon">🤲</div><h4>Волонтёрство</h4><p>Ваши руки и доброе сердце очень нужны</p></div>
+            <div class="way-item"><div class="way-icon">🔄</div><h4>Репост</h4><p>Расскажите о нас друзьям — это бесплатно, но бесценно</p></div>
+          </div>
+        </div>
+
+        
+        <div class="donate-form-modern animate-on-scroll" id="donateForm">
+          <h3> Сделать пожертвование</h3>
+          <p>Ваша помощь спасает жизни</p>
+          
+          <div class="amount-buttons">
+            <button type="button" class="amount-btn" onclick="setAmount(500)">500 ₽</button>
+            <button type="button" class="amount-btn" onclick="setAmount(1000)">1000 ₽</button>
+            <button type="button" class="amount-btn" onclick="setAmount(2000)">2000 ₽</button>
+            <button type="button" class="amount-btn" onclick="setAmount(5000)">5000 ₽</button>
+          </div>
+          
+          <div class="donate-input-group">
+            <input type="text" id="donateAmount" placeholder="Сумма пожертвования" value="500">
+          </div>
+          <div class="donate-input-group">
+            <input type="text" id="donateName" placeholder="Ваше имя (для отчёта)">
+          </div>
+          <div class="donate-input-group">
+            <input type="tel" id="donatePhone" placeholder="Номер телефона">
+          </div>
+          <button class="donate-submit-btn" id="donateBtn">💳 Пожертвовать сейчас</button>
+          <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">Безопасная оплата. Все данные защищены.</p>
+        </div>
+
+       
+        <h2><span>Точки сбора</span> в Оренбурге</h2>
+        <div class="boxes-grid">
+          <div class="box-item"><div class="box-icon">📍</div><span>Школа-Студия Нелли Губеевой, ул.Пролетарская, 262</span></div>
+          <div class="box-item"><div class="box-icon">📍</div><span>ТЦ «Евразия», ул.Мало-Луговая, 3/1</span></div>
+          <div class="box-item"><div class="box-icon">📍</div><span>ТРЦ «Кит», ул.Салмышская, 71</span></div>
+          <div class="box-item"><div class="box-icon">📍</div><span>Груминг-салон «Зоостиль», ул.Липовая, 3</span></div>
+          <div class="box-item"><div class="box-icon">📍</div><span>Магазин «Дом обуви», ул.Алтайская, 10</span></div>
+          <div class="box-item"><div class="box-icon">📍</div><span>ЦУМ «Меридиан», ул.Советская, 42</span></div>
+        </div>
+
+        
+        <div class="volunteer-section animate-on-scroll">
+          <h3> Станьте волонтёром</h3>
+          <p>Проведите выходной с пользой для души</p>
+          <div class="volunteer-stats">
+            <div class="stat"><div class="stat-number">52</div><div>Активных волонтёров</div></div>
+            <div class="stat"><div class="stat-number">120+</div><div>Спасённых хвостов в 2024</div></div>
+            <div class="stat"><div class="stat-number">∞</div><div>Благодарность от животных</div></div>
+          </div>
+          <button class="volunteer-btn" onclick="alert('Свяжитесь с нами: +7 (922) 818 44 22')">Стать волонтёром →</button>
+        </div>
+
+      
+        <div style="background: linear-gradient(135deg, #41b9c2, #359ea6); border-radius: 20px; padding: 25px; text-align: center; color: white; margin: 40px 0;">
+          <div style="font-size: 20px; margin-bottom: 10px;">БЕЗНАЛИЧНЫЕ ПОЖЕРТВОВАНИЯ</div>
+          <div style="font-size: 24px; font-weight: 700; letter-spacing: 2px;">5469 4600 1334 9617</div>
+          <div style="margin-top: 10px;">Евгения Владимировна П.</div>
+          <div style="font-size: 12px; opacity: 0.8; margin-top: 15px;">Сбербанк</div>
+        </div>
+
       </div>
     </section>
 
-    <section class="about-cta" aria-label="Призыв к действию">
+    <section class="about-cta">
       <p>НЕ ОСТАВАЙТЕСЬ В СТОРОНЕ, ПОМОГИТЕ ЖИВОТНЫМ ОБРЕСТИ СВОЙ ДОМ!</p>
     </section>
   </main>
@@ -131,32 +522,12 @@
             <p class="contacts__brand">ПУГАЧАН</p>
           </div>
         </div>
-        <p>
-          Для реализации нашего<br>
-          проекта нам необходим<br>
-          земельный участок<br>
-          площадью 2 га и<br>
-          строительные материалы.
-        </p>
-        <p>Политика<br>конфиденциальности</p>
+        <p>Для реализации нашего проекта нам необходим земельный участок площадью 2 га и строительные материалы.</p>
+        <p>Политика конфиденциальности</p>
       </div>
       <div class="contacts__col">
         <p class="contacts__title">Реквизиты</p>
-        <p>
-          АНО «Центр<br>
-          реабилитации и приют<br>
-          для<br>
-          животных «Отрада»<br>
-          ИНН 5609187812<br>
-          КПП 560901001<br>
-          ОГРН 1175658023166<br>
-          р/с<br>
-          40703810903000001577<br>
-          ОО №19 «На гагарина»<br>
-          г. Оренбург Приволжского<br>
-          Ф-ла ПАО<br>
-          «Промсвязьбанк»
-        </p>
+        <p>АНО «Центр реабилитации и приют для животных «Отрада»<br>ИНН 5609187812<br>КПП 560901001<br>ОГРН 1175658023166</p>
       </div>
       <div class="contacts__col contacts__col--contact">
         <p class="contacts__title">Контакты</p>
@@ -167,5 +538,22 @@
   </footer>
 
   <script src="./script.js" defer></script>
+  <script>
+    function setAmount(amount) {
+      document.getElementById('donateAmount').value = amount;
+      document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    
+    document.getElementById('donateBtn')?.addEventListener('click', function() {
+      const amount = document.getElementById('donateAmount').value;
+      const name = document.getElementById('donateName').value;
+      if (amount && amount > 0) {
+        alert(`Спасибо, ${name || 'добрый человек'}! Сумма ${amount} ₽ принята. Животные вас очень благодарны! 🐾`);
+      } else {
+        alert('Пожалуйста, введите сумму пожертвования');
+      }
+    });
+  </script>
 </body>
 </html>

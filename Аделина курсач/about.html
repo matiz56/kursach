@@ -6,8 +6,256 @@
   <title>О нас — Пугачан</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+   
+    .stats-section {
+      background: linear-gradient(135deg, #41b9c2, #2c8a91);
+      padding: 50px 0;
+      margin: 40px 0;
+      border-radius: 30px;
+      color: white;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+    
+    .stat-card {
+      padding: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.2);
+    }
+    
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    /* Миссия и ценности */
+    .mission-vision {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 50px 0;
+    }
+    
+    .mv-card {
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+    
+    .mv-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(65,185,194,0.15);
+    }
+    
+    .mv-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    
+    .mv-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .mv-card h3 span {
+      color: #41b9c2;
+    }
+    
+    .mv-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* Команда */
+    .team-section {
+      margin: 50px 0;
+    }
+    
+    .team-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    
+    .team-member {
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(65,185,194,0.2);
+    }
+    
+    .team-photo {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .team-info {
+      padding: 20px;
+    }
+    
+    .team-info h4 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .team-role {
+      color: #41b9c2;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .team-desc {
+      color: #666;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    
+    
+    .timeline-section {
+      margin: 50px 0;
+    }
+    
+    .timeline-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #41b9c2, #8ee4ea);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 30px;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: -26px;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: #41b9c2;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px #41b9c2;
+    }
+    
+    .timeline-year {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #41b9c2;
+      margin-bottom: 10px;
+    }
+    
+    .timeline-text {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    /* Партнёры */
+    .partners-section {
+      background: #f8f9fa;
+      border-radius: 30px;
+      padding: 40px;
+      margin: 50px 0;
+      text-align: center;
+    }
+    
+    .partners-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 30px;
+    }
+    
+    .partner-logo {
+      font-size: 2rem;
+      padding: 15px 25px;
+      background: white;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    
+    .partner-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(65,185,194,0.2);
+    }
+    
+    /* Подпись */
+    .signature {
+      text-align: right;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #e0e0e0;
+      font-style: italic;
+      color: #666;
+    }
+    
+    @media (max-width: 62rem) {
+      .stats-grid, .mission-vision, .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .signature {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body class="page-with-header">
   <header class="header header--static" id="header">
@@ -40,35 +288,144 @@
       <div class="container about__content">
         <div class="about__text">
           <h3>ОБРАЩЕНИЕ К <span>ПОСЕТИТЕЛЯМ</span></h3>
-          <h4>РАДЫ ПРИВЕТСТВОВАТЬ ВАС, ДОРОГИЕ ДРУЗЬЯ!</h4>
+          <h4>РАДА ПРИВЕТСТВОВАТЬ ВАС, ДОРОГИЕ ДРУЗЬЯ!</h4>
           <p>
-            Меня зовут Лян Айфон - основатель центра реабилитации и приюта «Пугачан».
-            Толчком к появлению данного центра реабилитации и приюта стала безысходность.
-            Безысходность от невозможности помочь всем тем брошенным, беззащитным, и никому
-            не нужным беспризорным животным.
+            Меня зовут <strong>Лян Айфон</strong> — основательница центра реабилитации и приюта «Пугачан».
+            Толчком к появлению данного центра стала безысходность от невозможности помочь всем тем брошенным, 
+            беззащитным и никому не нужным беспризорным животным.
           </p>
           <p>
-            Волонтерской деятельностью я начал заниматься 15 лет назад. И за это немалое время
-            помогла большому количеству животных. Сейчас у меня дома мини-приют, где проживает
-            22 собаки и 30 кошек.
+            Волонтёрской деятельностью я начала заниматься 15 лет назад. И за это время помогла большому количеству животных. 
+            Сейчас у меня дома мини-приют, где проживает 22 собаки и 30 кошек.
           </p>
           <p>
-            Всё это время я мечтал организовать полноценный приют, где будет всё: просторные
-            вольеры, большая территория для прогулок, полноценный медицинский блок, полные
-            миски еды и счастливые глаза животных.
+            Всё это время я мечтала организовать полноценный приют, где будет всё: просторные вольеры, большая территория 
+            для прогулок, полноценный медицинский блок, полные миски еды и счастливые глаза животных.
           </p>
           <p>
-            Сейчас моя мечта маленькими шажками начинает сбываться: оформлены все необходимые
-            документы, готов проект приюта, есть штат помощников и партнёров. Но впереди еще
-            очень много работы. И я надеюсь с помощью неравнодушных людей, моя мечта и мечты
-            беззащитных, брошенных животных о сытой жизни в тепле сбудутся!
+            Сейчас моя мечта маленькими шажками начинает сбываться: оформлены все необходимые документы, готов проект приюта, 
+            есть штат помощников и партнёров. Но впереди ещё очень много работы. И я надеюсь, что с помощью неравнодушных людей 
+            моя мечта и мечты беззащитных, брошенных животных о сытой жизни в тепле сбудутся!
           </p>
+          <div class="signature">
+            С уважением и любовью к животным,<br>
+            <strong>Лян Айфон</strong> и вся команда «Пугачан» 🐾
+          </div>
         </div>
         <div class="about__image">
-          <img src="./img/foto_o_nas.png" alt="Основатель приюта с собакой">
+          <img src="./img/foto_o_nas.png" alt="Основательница приюта с собакой">
         </div>
       </div>
     </section>
+
+    
+    <div class="container">
+      <div class="stats-section animate-on-scroll">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-number">15+</div><div class="stat-label">лет помощи животным</div></div>
+          <div class="stat-card"><div class="stat-number">52</div><div class="stat-label">питомца в приюте сейчас</div></div>
+          <div class="stat-card"><div class="stat-number">350+</div><div class="stat-label">животных спасено за всё время</div></div>
+          <div class="stat-card"><div class="stat-number">120+</div><div class="stat-label">волонтёров в команде</div></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container">
+      <div class="mission-vision">
+        <div class="mv-card animate-on-scroll">
+          <div class="mv-icon">🎯</div>
+          <h3>Наша <span>миссия</span></h3>
+          <p>Создать безопасное и комфортное место для бездомных животных, где каждый питомец получит заботу, лечение и шанс обрести любящий дом.</p>
+        </div>
+        <div class="mv-card animate-on-scroll">
+          <div class="mv-icon">💚</div>
+          <h3>Наши <span>ценности</span></h3>
+          <p>Сочувствие, ответственность, открытость и любовь к каждому живому существу. Мы верим, что добро возвращается добром.</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container">
+      <div class="timeline-section">
+        <h2>Наша <span>история</span></h2>
+        <div class="timeline">
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2010</div>
+            <div class="timeline-text">Начало волонтёрской деятельности. Первые спасённые животные дома у основательницы.</div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2018</div>
+            <div class="timeline-text">Организация мини-приюта на дому. 22 собаки и 30 кошек под опекой.</div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2022</div>
+            <div class="timeline-text">Оформление документов АНО «Центр реабилитации и приют для животных «Отрада».</div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2024</div>
+            <div class="timeline-text">Разработка проекта полноценного приюта. Поиск земли и строительство.</div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+            <div class="timeline-text">Мы здесь и сейчас — растем, помогаем и верим в лучшее будущее! </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container">
+      <div class="team-section">
+        <h2>Наша <span>команда</span></h2>
+        <div class="team-grid">
+          <div class="team-member animate-on-scroll">
+            <img class="team-photo" src="./img/foto_o_nas.png" alt="Лян Айфон">
+            <div class="team-info">
+              <h4>Лян Айфон</h4>
+              <div class="team-role">Основательница</div>
+              <div class="team-desc">15 лет в спасении животных. Душа и сердце приюта.</div>
+            </div>
+          </div>
+          <div class="team-member animate-on-scroll">
+            <img class="team-photo" src="./img/teya_koshki.png" alt="Екатерина">
+            <div class="team-info">
+              <h4>Екатерина</h4>
+              <div class="team-role">Главный ветврач</div>
+              <div class="team-desc">10 лет опыта в лечении и реабилитации животных.</div>
+            </div>
+          </div>
+          <div class="team-member animate-on-scroll">
+            <img class="team-photo" src="./img/bonya_sobaki.png" alt="Алексей">
+            <div class="team-info">
+              <h4>Алексей</h4>
+              <div class="team-role">Координатор волонтёров</div>
+              <div class="team-desc">Организует помощь и уход за питомцами.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container">
+      <div class="partners-section animate-on-scroll">
+        <h3> Наши партнёры</h3>
+        <div class="partners-grid">
+          <div class="partner-logo">🐾 Зоостиль</div>
+          <div class="partner-logo">🏪 Экстрим Джим</div>
+          <div class="partner-logo">🏨 Виктория</div>
+          <div class="partner-logo">🏛️ Меридиан</div>
+          <div class="partner-logo">🦴 4 с хвостиком</div>
+        </div>
+      </div>
+    </div>
 
     <section class="about-cta" aria-label="Призыв к действию">
       <p>НЕ ОСТАВАЙТЕСЬ В СТОРОНЕ, ПОМОГИТЕ ЖИВОТНЫМ ОБРЕСТИ СВОЙ ДОМ!</p>

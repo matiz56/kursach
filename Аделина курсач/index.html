@@ -8,6 +8,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <style>
+    /* Дополнительные стили для стабильного параллакса */
+    .hero {
+      position: relative;
+      min-height: 46rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero__media {
+      position: absolute;
+      inset: 0;
+      background: url("./img/63e6f84660a90f866fd137dfab52ce5c.jpg") center / cover no-repeat;
+      will-change: transform;
+      /* Начальная позиция */
+      transform: translateY(0) scale(1.07);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      padding-top: 6rem;
+    }
+  </style>
 </head>
 <body>
   <header class="header" id="header">
@@ -207,5 +240,59 @@
   </footer>
 
   <script src="./script.js" defer></script>
+  
+  <!-- ОТДЕЛЬНЫЙ СКРИПТ ДЛЯ ПАРАЛЛАКСА (СТАБИЛЬНАЯ ВЕРСИЯ) -->
+  <script>
+    (function() {
+      // Получаем элементы
+      const heroMedia = document.querySelector('.hero__media');
+      const missionBg = document.querySelector('.mission__bg');
+      
+      // Проверяем наличие элементов
+      if (!heroMedia && !missionBg) return;
+      
+      let ticking = false;
+      let lastScrollY = window.scrollY;
+      
+      function updateParallax() {
+        const scrollY = window.scrollY;
+        
+        // Параллакс для hero - очень медленное движение
+        if (heroMedia) {
+          // Ограничиваем максимальное смещение
+          const heroOffset = Math.min(scrollY * 0.25, 150);
+          heroMedia.style.transform = `translateY(${heroOffset}px) scale(1.07)`;
+        }
+        
+        // Параллакс для секции миссии
+        if (missionBg) {
+          const missionOffset = scrollY * 0.15;
+          missionBg.style.transform = `translateY(${missionOffset}px)`;
+        }
+        
+        ticking = false;
+      }
+      
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+      
+      // Вешаем обработчик с пассивным режимом для производительности
+      window.addEventListener('scroll', onScroll, { passive: true });
+      
+      // Обновляем при загрузке и изменении размера окна
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(updateParallax);
+      });
+      
+      // Начальное обновление
+      setTimeout(updateParallax, 100);
+      
+      console.log('Параллакс инициализирован (стабильная версия)');
+    })();
+  </script>
 </body>
 </html>

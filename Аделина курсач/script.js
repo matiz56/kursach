@@ -1,3 +1,5 @@
+// ==================== ОСНОВНЫЕ ФУНКЦИИ (БЕЗ ДУБЛИРОВАНИЯ) ====================
+
 const header = document.getElementById("header");
 const heroMedia = document.getElementById("heroMedia");
 const missionBg = document.querySelector(".mission__bg");
@@ -8,25 +10,38 @@ function updateHeaderState() {
   header.classList.toggle("is-scrolled", window.scrollY > 20);
 }
 
-function handleHeroMouseMove(event) {
-  if (!heroMedia) return;
-  const x = (event.clientX / window.innerWidth - 0.5) * 12;
-  const y = (event.clientY / window.innerHeight - 0.5) * 8;
-  heroMedia.style.transform = `scale(1.07) translate3d(${x}px, ${y}px, 0)`;
+// === ПАРАЛЛАКС - ИСПРАВЛЕННАЯ ВЕРСИЯ (НЕ СЪЕЗЖАЕТ) ===
+let ticking = false;
+let lastScrollY = 0;
+
+function updateParallax() {
+  const scrollY = window.scrollY;
+  
+  // Параллакс для hero - очень медленное движение, ограниченное
+  if (heroMedia) {
+    const offset = Math.min(scrollY * 0.2, 80);
+    heroMedia.style.transform = `translate3d(0, ${offset}px, 0) scale(1.07)`;
+  }
+  
+  // Параллакс для секции миссии
+  if (missionBg) {
+    const section = document.getElementById("mission");
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      const offset = Math.max(Math.min((rect.top - window.innerHeight / 2) * -0.1, 50), -50);
+      missionBg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.04)`;
+    }
+  }
+  
+  ticking = false;
 }
 
-function handleHeroMouseLeave() {
-  if (!heroMedia) return;
-  heroMedia.style.transform = "scale(1.07) translate3d(0, 0, 0)";
-}
-
-function updateMissionParallax() {
-  if (!missionBg) return;
-  const section = document.getElementById("mission");
-  if (!section) return;
-  const rect = section.getBoundingClientRect();
-  const offset = (rect.top - window.innerHeight / 2) * -0.16;
-  missionBg.style.transform = `translate3d(0, ${offset}px, 0) scale(1.04)`;
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+  updateHeaderState();
 }
 
 function initRevealAnimation() {
@@ -46,26 +61,21 @@ function initRevealAnimation() {
 
 function init() {
   updateHeaderState();
-  updateMissionParallax();
+  updateParallax();
   initRevealAnimation();
-  document.addEventListener("mousemove", handleHeroMouseMove);
-  document.addEventListener("mouseleave", handleHeroMouseLeave);
-  window.addEventListener("scroll", () => {
-    updateHeaderState();
-    updateMissionParallax();
-  });
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", () => requestAnimationFrame(updateParallax));
 }
 
 init();
-// ========== ОТЗЫВЫ НА СТРАНИЦЕ ПИТОМЦЫ ==========
+
+// ==================== ОТЗЫВЫ НА СТРАНИЦЕ ПИТОМЦЫ ====================
 (function() {
-  // Проверяем, что мы на странице питомцев
   const reviewsGrid = document.getElementById('reviewsGrid');
   if (!reviewsGrid) return;
 
   let reviews = [];
 
-  // Загрузка отзывов из localStorage
   function loadReviews() {
     const saved = localStorage.getItem('pugachan_reviews');
     if (saved) {
@@ -76,12 +86,10 @@ init();
     }
   }
 
-  // Сохранение отзывов
   function saveReviews() {
     localStorage.setItem('pugachan_reviews', JSON.stringify(reviews));
   }
 
-  // Определение типа питомца
   function getPetType(petName) {
     const cats = ['Тея', 'Бакс', 'Белла', 'Амелия', 'Оскар'];
     const dogs = ['Боня', 'Соня', 'Хлоя', 'Каштанка'];
@@ -90,7 +98,6 @@ init();
     return 'all';
   }
 
-  // Рендер отзывов
   function renderReviews(filter = 'all') {
     if (!reviewsGrid) return;
     
@@ -130,7 +137,6 @@ init();
     return div.innerHTML;
   }
 
-  // Удаление отзыва
   window.deleteReview = function(id) {
     if (confirm('Удалить этот отзыв?')) {
       reviews = reviews.filter(r => r.id !== id);
@@ -140,14 +146,12 @@ init();
     }
   };
 
-  // Получение текущей даты
   function getFormattedDate() {
     const now = new Date();
     const months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
     return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
   }
 
-  // Обработка формы
   const form = document.getElementById('reviewForm');
   if (form) {
     const photoInput = document.getElementById('reviewPhoto');
@@ -198,30 +202,31 @@ init();
         image: null
       };
       
-      if (photoFile) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          newReview.image = event.target.result;
-          reviews.unshift(newReview);
-          saveReviews();
-          renderReviews(document.querySelector('.filter-btn.active')?.dataset.filter || 'all');
-          form.reset();
-          imagePreview.innerHTML = '';
-          imagePreview.style.display = 'none';
-          alert('Отзыв опубликован! Спасибо!');
-        };
-        reader.readAsDataURL(photoFile);
-      } else {
+      function publishReview() {
         reviews.unshift(newReview);
         saveReviews();
         renderReviews(document.querySelector('.filter-btn.active')?.dataset.filter || 'all');
         form.reset();
+        if (imagePreview) {
+          imagePreview.innerHTML = '';
+          imagePreview.style.display = 'none';
+        }
         alert('Отзыв опубликован! Спасибо!');
+      }
+      
+      if (photoFile) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          newReview.image = event.target.result;
+          publishReview();
+        };
+        reader.readAsDataURL(photoFile);
+      } else {
+        publishReview();
       }
     });
   }
   
-  // Фильтры
   const filterBtns = document.querySelectorAll('.filter-btn');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -232,6 +237,134 @@ init();
     });
   });
   
-  // Загружаем отзывы
   loadReviews();
+})();
+
+// ==================== ПЛАВНОЕ ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ====================
+(function() {
+    const animatedElements = document.querySelectorAll('.priority, .pet-item, .review-card, .partner, .help__grid article, .about__text, .about__image');
+    
+    if (animatedElements.length === 0) return;
+    
+    // Добавляем CSS классы
+    const style = document.createElement('style');
+    style.textContent = `
+        .fade-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .fade-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #41b9c2;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover {
+            background: #359ea6;
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Добавляем класс анимации всем элементам
+    animatedElements.forEach(el => {
+        el.classList.add('fade-on-scroll');
+    });
+    
+    // Настройка IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: "0px 0px -30px 0px" });
+    
+    document.querySelectorAll('.fade-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+})();
+
+// ==================== КНОПКА "НАВЕРХ" ====================
+(function() {
+    if (document.querySelector('.scroll-to-top')) return;
+    
+    const scrollBtn = document.createElement('button');
+    scrollBtn.innerHTML = '↑';
+    scrollBtn.className = 'scroll-to-top';
+    scrollBtn.setAttribute('aria-label', 'Наверх');
+    document.body.appendChild(scrollBtn);
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollBtn.classList.add('show');
+        } else {
+            scrollBtn.classList.remove('show');
+        }
+    });
+    
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+
+// ==================== ПОДСВЕТКА АКТИВНОГО МЕНЮ ====================
+(function() {
+    const navLinks = document.querySelectorAll('.nav a');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || (href === './index.html#hero' && currentPage === 'index.html')) {
+            link.style.color = '#41b9c2';
+            link.style.fontWeight = '700';
+        }
+    });
+})();
+
+// ==================== ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРЕЙ ====================
+(function() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 })();
